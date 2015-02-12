@@ -21,5 +21,8 @@ import org.junit.runners.Suite;
 	})
 
 public class TestSuite {
-
+	
+	// this is a test comment
+	
+	
 }
