@@ -1,22 +1,35 @@
 package org.jfree.data.test;
 
+
+
+import static org.junit.Assert.*;
+
 import org.jfree.data.DataUtilities;
-import org.jmock.Mockery;
-import org.junit.*;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-import junit.framework.TestCase;
 
-public class DataUtilitiesTestCreateNumberArray2DMethod extends TestCase {
+public class DataUtilitiesTestCreateNumberArray2DMethod extends DataUtilities {
 
 	private Number[][] result;
 	private double[][] data;
 	
-	public DataUtilitiesTestCreateNumberArray2DMethod(String name) {
-		super(name);
+	public DataUtilitiesTestCreateNumberArray2DMethod() {
+	}
+	
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
 	}
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+	}
+
+	@Before
+	public void setUp() throws Exception {
 		data = new double[2][2];
 		for (int i = 0; i < data.length; i++) 
 			for (int j = 0; j < data[0].length; j++) {
@@ -25,52 +38,43 @@ public class DataUtilitiesTestCreateNumberArray2DMethod extends TestCase {
 		
 	}
 
-	protected void tearDown() throws Exception {
-		super.tearDown();
+	@After
+	public void tearDown() throws Exception {
 	}
 	
 	@Test
 	public void testValidAndInitiallizedDataStructure() {
-		Number[][] result = DataUtilities.createNumberArray2D(data);
-		Number[][] expected = {{0,1},{1,2}};
-		assertEquals("tried a valid 2x2 double array with sums of indices as entries", expected, result);
-		//Dont know why this is an error and not a failure
+		double[][] data2 = {{0,1},{1,2}};
+		Number[][] result = DataUtilities.createNumberArray2D(data2);
+		Number[][] expected = {{0.0,1.0},{1.0,2.0}};
+		assertArrayEquals("tried a valid 2x2 double array with sums of indices as entries", expected, result);
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void testInvalidDataStructure() {
 		data = null;
 		Number[][] result = DataUtilities.createNumberArray2D(data);
-		Number[][] expected = null;
-		assertEquals("tried to pass in a null double array", expected, result);
-		
-		/* how do I make this test pass? We are supposed to see an Illegal argument exeption
-		 * but it is failing because there is an illegal argument exception even though 
-		 * I've told it to expect that
-		 */
+		assertNull("tried to pass in a null double array", result);
+		//Number[][] expected = null;
+		//assertEquals("tried to pass in a null double array", expected, result);
 	}
 	
 	@Test
 	public void testOneElementArray() {
 		data = new double[1][1];
 		data[0][0] = 1;
-		Number[][] expected = {{1}};
+		Number[][] expected = {{1.0}};
 		result = DataUtilities.createNumberArray2D(data);
-		assertEquals("tried to pass in a 2D array with one element", expected, result);
-		//Dont know why this is an error and not a failure
+		assertArrayEquals("tried to pass in a 2D array with one element", expected, result);
 	}
 	
-	@Test(expected = Exception.class)
+	@Test
 	public void testUninitiallizedElementArray() {
+		// There really is no such thing as an unititlalized primitive in java...
 		data = new double[1][1];
-		Number[][] expected = {{null}};
+		Number[][] expected = {{0.0}};
 		result = DataUtilities.createNumberArray2D(data);
-		assertEquals("tried to pass in an uninitiallized 2D array", expected, result);
-		
-		// Not really sure if the expected type should be {{null}} here
-		// since it is not specified in the requirments, perhaps we are supposed
-		// to see some sort of exception. It's difficult to know when we cannot
-		// see the code and it is not in the docs
+		assertArrayEquals("tried to pass in an uninitiallized 2D array", expected, result);
 	}
 
 }

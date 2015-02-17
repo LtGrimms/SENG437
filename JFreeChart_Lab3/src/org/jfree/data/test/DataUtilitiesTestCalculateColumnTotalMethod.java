@@ -1,29 +1,43 @@
 package org.jfree.data.test;
 
+import static org.junit.Assert.*;
+
 import org.jfree.data.DataUtilities;
 import org.jfree.data.Values2D;
 import org.jmock.Expectations;
 import org.jmock.Mockery;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-import junit.framework.TestCase;
-
-public class DataUtilitiesTestCalculateColumnTotalMethod extends TestCase {
+public class DataUtilitiesTestCalculateColumnTotalMethod extends DataUtilities {
 
 	private Mockery mockingContext;
 	
-	public DataUtilitiesTestCalculateColumnTotalMethod(String name) {
-		super(name);
+	public DataUtilitiesTestCalculateColumnTotalMethod() {
+		//super(name);
+	}
+	
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
 	}
 
-	protected void setUp() throws Exception {
-		super.setUp();
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+	}
+
+	@Before
+	public void setUp() throws Exception {
 		mockingContext = new Mockery();
 	}
 
-	protected void tearDown() throws Exception {
-		super.tearDown();
+	@After
+	public void tearDown() throws Exception {
 	}
 	
+	@Test
 	public void test_1_CalculateColumnTotalForOneValue() {
 		final Values2D values = mockingContext.mock(Values2D.class);
 		mockingContext.checking(new Expectations() {
@@ -40,6 +54,7 @@ public class DataUtilitiesTestCalculateColumnTotalMethod extends TestCase {
 		assertEquals(result, 5.0, 0.000000001d);
 	}
 	
+	@Test
 	public void test_2_CalculateColumnTotalForTwoValues() {
 	 final Values2D values = mockingContext.mock(Values2D.class);
 	 mockingContext.checking(new Expectations() {
@@ -59,8 +74,8 @@ public class DataUtilitiesTestCalculateColumnTotalMethod extends TestCase {
 	 mockingContext.assertIsSatisfied();
 	} 
 	
+	@Test
 	public void test_3_CalculateComumnTotalsOnEmptyValues() {
-		//setup
 		final Values2D values = mockingContext.mock(Values2D.class);
 		mockingContext.checking(new Expectations() {
 			{
@@ -74,9 +89,10 @@ public class DataUtilitiesTestCalculateColumnTotalMethod extends TestCase {
 		double result = DataUtilities.calculateColumnTotal(values,  0);
 		
 		mockingContext.assertIsSatisfied();
-		assertEquals("calculate column totals on a 0x0 2D array", 0.0, result);
+		assertEquals("calculate column totals on a 0x0 2D array", 0.0, result, .000000001d);
 	}
 	
+	@Test
 	public void test_4_CalculateColumnTotalsWithNullColumnValue() {
 		final Values2D values = mockingContext.mock(Values2D.class);
 		mockingContext.checking(new Expectations() {
@@ -95,10 +111,11 @@ public class DataUtilitiesTestCalculateColumnTotalMethod extends TestCase {
 		double result = DataUtilities.calculateColumnTotal(values, 0);
 		
 		mockingContext.assertIsSatisfied();
-		assertNull("tried adding three elemetns with null values, expected " + null + " recieved " + result, result);
-		//Dont know why this is an error and not a failure
+		assertEquals("tried adding three elemetns with null values, expected " + 0 + " recieved " + result, 0, result, .000000001d);
+		//We cannot expect a null here, doubles can't be null
 	}
 	
+	@Test(expected = IllegalStateException.class)
 	public void test_5_CalculateColumnTotalsWithColumnOutOfBounds() {
 		final Values2D values = mockingContext.mock(Values2D.class);
 		mockingContext.checking(new Expectations() {
