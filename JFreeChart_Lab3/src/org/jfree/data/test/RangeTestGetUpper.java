@@ -28,7 +28,12 @@ public class RangeTestGetUpper extends TestCase {
 	@Test
 	public void test_1_null()
 	{
+		try{
 		assertNull("Null", testRange.getUpperBound());
+		fail("Should've throw an exception");
+		}catch(NullPointerException E){
+			
+		}
 	}
 	
 	@Test

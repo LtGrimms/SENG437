@@ -1,11 +1,15 @@
 package org.jfree.data.test;
 
 import org.junit.*;
+import org.junit.rules.ExpectedException;
 import org.jfree.data.DataUtilities;
 
 import junit.framework.TestCase;
 
 public class DataUtilitiesTestCreateNumberArray extends TestCase {
+	
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 	
 	public DataUtilitiesTestCreateNumberArray(String name) {
 		super(name);
@@ -40,11 +44,16 @@ public class DataUtilitiesTestCreateNumberArray extends TestCase {
 		//Dont know why this is an error and not a failure
 	}
 	
-	@Test(expected = IllegalArgumentException.class)
+	@Test //(expected = IllegalArgumentException.class)
 	public void testInvalidDataStructure(){
 		double[] input = null;
-		Number[] expected = {null};
-		Number[] output = DataUtilities.createNumberArray(input);
+		
+		try{
+			Number[] output = DataUtilities.createNumberArray(input);
+			fail("should've thrown an exception");
+		}catch (IllegalArgumentException expected){
+			
+		}
 		
 		//assertEquals("Test invalid input", output);
 		//Dont know why this is an error and not a failure or pass
@@ -56,7 +65,17 @@ public class DataUtilitiesTestCreateNumberArray extends TestCase {
 		Number[] expected = {1};
 		Number[] output = DataUtilities.createNumberArray(input);
 		
-		assertEquals("Testing conversion of a one elemnt Array into a Number Array", expected, output);
+		Boolean result = true;		
+		for(int i = 0; (i < output.length) && result; i++){
+					
+			if(output[i].doubleValue() != expected[i].doubleValue()){
+				result = false;
+			}
+		}
+		
+		assertTrue("Test valid input", result);	
+
+//		assertEquals("Testing conversion of a one element Array into a Number Array", expected, output);
 		//Dont know why this is an error and not a failure or pass
 	}
 }
