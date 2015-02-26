@@ -171,4 +171,28 @@ public class DataUtilitiesTestCalcRow extends DataUtilities {
 		assertEquals("Multiple column outside, ", expectedValue, result, .000000001d);
 	} 
 */
+	
+	@Test
+	public void test_7_null_row()
+	{
+		// setup
+		Mockery mockingContext = new Mockery();
+		final Values2D values = mockingContext.mock(Values2D.class);
+		int rowNum = 0;
+		double expectedValue = 0;
+		
+		mockingContext.checking(new Expectations() {
+														{
+															one(values).getColumnCount();	will(returnValue(3));
+															one(values).getValue(0, 0);	will(returnValue(null));
+															one(values).getValue(0, 1);	will(returnValue(null));
+															one(values).getValue(0, 2);	will(returnValue(null));
+														}
+													});
+
+		double result = DataUtilities.calculateRowTotal(values, rowNum);
+
+		assertEquals("Multiple column within, ", expectedValue, result, .000000001d);
+	} 
+	
 }
