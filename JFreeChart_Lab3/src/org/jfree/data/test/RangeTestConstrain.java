@@ -1,8 +1,16 @@
 package org.jfree.data.test;
 
+/*
+ * Cannot get %100 branch coverage since there is an 
+ * else if that should just be an else
+ */
+
 import junit.framework.TestCase;
+
 import org.jfree.data.Range;
 import org.junit.*;
+
+
 
 public class RangeTestConstrain extends TestCase {
 

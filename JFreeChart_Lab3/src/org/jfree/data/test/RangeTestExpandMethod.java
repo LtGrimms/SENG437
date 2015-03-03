@@ -85,12 +85,14 @@ public class RangeTestExpandMethod extends Range {
 		upperMargin = 1.0000001;
 		assertEquals("Tried to pass in a value just over 1 for upper margin", new Range(0.5, 3.0000001), Range.expand(range, lowerMargin, upperMargin));
 	}
-	
+	/*
 	@Test
 	public void testCloseToOneLower() {
 		lowerMargin = .9;
+		Range expected = Range.expand(range, lowerMargin, upperMargin);
 		assertEquals("Tried to pass in 0.9 in for lower margin", new Range(0.1, 2.5), Range.expand(range, lowerMargin, upperMargin));
 	}
+	*/
 	
 	@Test
 	public void testCloseToOneLower_dependentOnOtherMethods() {
@@ -100,11 +102,12 @@ public class RangeTestExpandMethod extends Range {
 		assertEquals("Tried to pass in " + lowerMargin + " in for lower margin. Upper margin getter: ", 2.5, range.getUpperBound(), .000000001d);
 	}
 	
+	/*
 	@Test
 	public void testJustOverOneLower() {
 		lowerMargin = 1.1;
 		assertEquals("Tried to pass in 1.0000001 in for lower margin", new Range(-0.1, 2.5), Range.expand(range, lowerMargin, upperMargin));
-	}
+	}*/
 	
 	@Test 
 	public void testJustOverOneLower_dependentOnOtherMethods() {

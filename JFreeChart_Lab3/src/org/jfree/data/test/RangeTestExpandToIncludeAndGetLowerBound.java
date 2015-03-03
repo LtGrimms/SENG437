@@ -1,14 +1,22 @@
 package org.jfree.data.test;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
+
 import org.jfree.data.Range;
-import org.junit.*;
-//import org.jmock.integration.junit3.MockObjectTestCase;
-//import org.jmock.Expectations;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-public class RangeTestExpandToIncludeAndGetLowerBound extends /*MockObject*/TestCase {
 
-	private Range exampleRange, /*nullRange,*/ secondRange;
+public class RangeTestExpandToIncludeAndGetLowerBound extends Range {
+
+	public RangeTestExpandToIncludeAndGetLowerBound() {
+		super(1,1);
+	}
+	
+	private Range exampleRange, nullRange, secondRange;
 	//private Double double1;
 	
 	@BeforeClass
@@ -25,7 +33,7 @@ public class RangeTestExpandToIncludeAndGetLowerBound extends /*MockObject*/Test
 		//double null1 = double1;
 		//double null2 = double1;
 		exampleRange = new Range(-1, 1);
-		//nullRange = new Range(null1, null2);
+		nullRange = null;
 		secondRange = new Range(1, 2);
 	}
 	
@@ -44,14 +52,14 @@ public class RangeTestExpandToIncludeAndGetLowerBound extends /*MockObject*/Test
 
 	
 	@Test public void testexpandToIncludeUpperExtend() {
-		Range.expandToInclude(exampleRange, 5);
+		exampleRange = Range.expandToInclude(exampleRange, 5);
 		assertEquals("The expected lower bound should be -1.", -1, exampleRange.getLowerBound(), .000000001d);
-		assertEquals("The expected upper bound should be 5.", 5, exampleRange.getLowerBound(), .000000001d);
+		assertEquals("The expected upper bound should be 5.", 5, exampleRange.getUpperBound(), .000000001d);
 		// cleanup
 		exampleRange = new Range(-1, 1);
 	}
 	@Test public void testexpandToIncludeLowerExtend() {
-		Range.expandToInclude(exampleRange, -5);
+		exampleRange = Range.expandToInclude(exampleRange, -5);
 		assertEquals("The expected lower bound should be -5.", -5, exampleRange.getLowerBound(), .000000001d);
 		assertEquals("The expected upper bound should be 1.", 1, exampleRange.getUpperBound(), .000000001d);
 		// cleanup
@@ -62,13 +70,13 @@ public class RangeTestExpandToIncludeAndGetLowerBound extends /*MockObject*/Test
 		assertEquals("The expected lower bound should be -1.", -1, exampleRange.getLowerBound(), .000000001d);
 		assertEquals("The expected upper bound should be 1.", 1, exampleRange.getUpperBound(), .000000001d);
 	}
-	/*@Test public void testexpandToIncludeNullRange() {
-		Range.expandToInclude(nullRange, 5);
-		assertEquals("Null range should return 0 lower bound.", 0, nullRange.getLowerBound(), .000000001d);
-		assertEquals("Null range should return 0 upper bound.", 0, nullRange.getUpperBound(), .000000001d);
+	@Test public void testexpandToIncludeNullRange() {
+		nullRange = Range.expandToInclude(nullRange, 5);
+		assertEquals("Null range should return 5 lower bound.", 5, nullRange.getLowerBound(), .000000001d);
+		assertEquals("Null range should return 5 upper bound.", 5, nullRange.getUpperBound(), .000000001d);
 		// cleanup
-		nullRange = new Range(new Double(null), new Double(null));
-	}
+		// nullRange = new Range(new Double(null), new Double(null));
+	}/*
 	@Test public void testexpandToIncludeNullValue() {
 		Range.expandToInclude(exampleRange, new Double(null));
 		assertEquals("The expected lower bound should be -1.", -1, exampleRange.getLowerBound(), .000000001d);

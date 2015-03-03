@@ -1,6 +1,9 @@
 package org.jfree.data.test;
 
-
+/*
+ * cannot bring loop coverage to %100 since it is impossible to 
+ * create a 2D array with length 0
+ */
 
 import static org.junit.Assert.*;
 
@@ -55,8 +58,6 @@ public class DataUtilitiesTestCreateNumberArray2DMethod extends DataUtilities {
 		data = null;
 		Number[][] result = DataUtilities.createNumberArray2D(data);
 		assertNull("tried to pass in a null double array", result);
-		//Number[][] expected = null;
-		//assertEquals("tried to pass in a null double array", expected, result);
 	}
 	
 	@Test
@@ -75,6 +76,14 @@ public class DataUtilitiesTestCreateNumberArray2DMethod extends DataUtilities {
 		Number[][] expected = {{0.0}};
 		result = DataUtilities.createNumberArray2D(data);
 		assertArrayEquals("tried to pass in an uninitiallized 2D array", expected, result);
+	}
+	
+	@Test
+	public void testZeroElementArray() {
+		double[][] data = {{}};
+		result = DataUtilities.createNumberArray2D(data);
+		Number[][] expected = {{}};
+		assertArrayEquals("tried to pass in {{}} as input", expected, result);
 	}
 
 }

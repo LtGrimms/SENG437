@@ -124,4 +124,30 @@ public class DataUtilitiesTestCalculateCumulativePercentage {
 		// cleanup
 		values = new DefaultKeyedValues();
 	}
+	
+	/* New Test for null keyed values */
+	@Test (expected = IllegalArgumentException.class)
+	public void testcalculateCumulativePercentageNullKeyValues() {
+		
+		values = null;
+		KeyedValues result = DataUtilities.getCumulativePercentages(values);
+	}
+	
+	/*New Test to increase loop coverage */
+	@Test
+	public void testCalculateCumulativePercentagesOneValue() {
+		Comparable<Integer> thing0 = 1;
+		values.addValue(thing0, 1);
+		KeyedValues result = DataUtilities.getCumulativePercentages(values);
+		assertEquals("Expected value of row 1 should be 1.0", 1.0, (Double) result.getValue(thing0), .000000001d);
+	}
+	
+	/*New test to increase branch coverage */
+	@Test
+	public void testCalculateCumulativePercentagesNullValues() {
+		Comparable<Integer> thing0 = 1;
+		values.addValue(thing0, null);
+		KeyedValues result = DataUtilities.getCumulativePercentages(values);
+		assertEquals("Expected value of row 1 should be NaN", Double.NaN, (Double) result.getValue(thing0), .000000001d);
+	}
 }

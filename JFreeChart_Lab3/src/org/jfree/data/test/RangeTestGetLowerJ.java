@@ -1,11 +1,21 @@
 package org.jfree.data.test;
 
-import junit.framework.TestCase;
+import static org.junit.Assert.*;
+
 import org.jfree.data.Range;
-import org.junit.*;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-public class RangeTestGetLowerJ extends TestCase {
 
+public class RangeTestGetLowerJ extends Range {
+
+	public RangeTestGetLowerJ() {
+		super(1,1);
+	}
+	
 	private Range testRange;
 	
 	@BeforeClass
@@ -17,15 +27,15 @@ public class RangeTestGetLowerJ extends TestCase {
 	}
 	
 	@Before
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		testRange = null;
 	}
 
 	@After
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 	}
 
-	@Test
+	@Test(expected = NullPointerException.class)
 	public void test_1_null()
 	{	
 		assertNull("Null", testRange.getLowerBound());

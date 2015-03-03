@@ -1,10 +1,20 @@
 package org.jfree.data.test;
 
-import junit.framework.TestCase;
-import org.jfree.data.Range;
-import org.junit.*;
+import static org.junit.Assert.*;
 
-public class RangeTestCombineJ extends TestCase {
+import org.jfree.data.Range;
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+
+public class RangeTestCombineJ extends Range {
+	
+	public RangeTestCombineJ() {
+		super(1,1);
+	}
 
 	private Range rangeOne, rangeTwo, rangeExpected;
 	
@@ -17,7 +27,7 @@ public class RangeTestCombineJ extends TestCase {
 	}
 	
 	@Before
-	protected void setUp() throws Exception {
+	public void setUp() throws Exception {
 		//Clear values of the ranges before running the tests
 		rangeOne = null;
 		rangeTwo = null;
@@ -25,7 +35,7 @@ public class RangeTestCombineJ extends TestCase {
 	}
 
 	@After
-	protected void tearDown() throws Exception {
+	public void tearDown() throws Exception {
 	}
 
 	@Test
