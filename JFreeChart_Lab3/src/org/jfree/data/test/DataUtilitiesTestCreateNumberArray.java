@@ -54,9 +54,17 @@ public class DataUtilitiesTestCreateNumberArray extends TestCase {
 		}catch (IllegalArgumentException expected){
 			
 		}
+
+	}
+	
+	@Test
+	public void testEmptyDataStructure(){
+		double [] input = { };
+		Number[] output = DataUtilities.createNumberArray(input);
+		int ExpectedArrayLength = 0;
 		
-		//assertEquals("Test invalid input", output);
-		//Dont know why this is an error and not a failure or pass
+		assertEquals("Test empty data structure", ExpectedArrayLength, output.length);	
+		
 	}
 	
 	@Test
