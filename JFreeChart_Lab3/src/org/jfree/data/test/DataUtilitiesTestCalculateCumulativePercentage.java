@@ -133,13 +133,11 @@ public class DataUtilitiesTestCalculateCumulativePercentage {
 		KeyedValues result = DataUtilities.getCumulativePercentages(values);
 	}
 	
-	/*New Test to increase loop coverage */
+	/*New Test to increase loop coverage */	
 	@Test
-	public void testCalculateCumulativePercentagesOneValue() {
-		Comparable<Integer> thing0 = 1;
-		values.addValue(thing0, 1);
+	public void testCalcCumulativePercentageZeroValues() {
 		KeyedValues result = DataUtilities.getCumulativePercentages(values);
-		assertEquals("Expected value of row 1 should be 1.0", 1.0, (Double) result.getValue(thing0), .000000001d);
+		//no assertion is needed for this test, we are simply hoping that no exception is thrown
 	}
 	
 	/*New test to increase branch coverage */

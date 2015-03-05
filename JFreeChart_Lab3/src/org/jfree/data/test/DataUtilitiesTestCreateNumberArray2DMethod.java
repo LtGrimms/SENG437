@@ -80,9 +80,9 @@ public class DataUtilitiesTestCreateNumberArray2DMethod extends DataUtilities {
 	
 	@Test
 	public void testZeroElementArray() {
-		double[][] data = {{}};
+		double[][] data = new double[0][0];
 		result = DataUtilities.createNumberArray2D(data);
-		Number[][] expected = {{}};
+		Number[][] expected = new Number[0][0];
 		assertArrayEquals("tried to pass in {{}} as input", expected, result);
 	}
 
