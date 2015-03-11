@@ -58,16 +58,16 @@ public class RangeTestCombineJ extends Range {
 		assertEquals("Null one, valid two", rangeExpected, Range.combine(rangeOne,  rangeTwo) );
 	}
 	
-	@Test
-	public void test_3_valid_null()
-	{
-		rangeOne = new Range(-1, 1);
-		rangeTwo = null;
-		
-		rangeExpected = new Range(-1, 1);
-		
-		assertEquals("Valid one, null two", rangeExpected, Range.combine(rangeOne,  rangeTwo) );
-	}
+//	@Test
+//	public void test_3_valid_null()
+//	{
+//		rangeOne = new Range(-1, 1);
+//		rangeTwo = null;
+//		
+//		rangeExpected = new Range(-1, 1);
+//		
+//		assertEquals("Valid one, null two", rangeExpected, Range.combine(rangeOne,  rangeTwo) );
+//	}
 	
 	
 	@Test

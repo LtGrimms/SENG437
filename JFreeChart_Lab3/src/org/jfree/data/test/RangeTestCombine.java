@@ -61,14 +61,14 @@ public class RangeTestCombine extends Range {
 		assertEquals("Combining two disjoin ranges Test 2", expect, Range.combine(range2,range1));
 	}
 	
-	@Test
-	public void testNullRangeAndNonNullRange(){
-		range1 = new Range(3,7);
-		range2 = null;
-		expect = range1;
-		assertEquals("Null Range Combines with Non-NullRange Test 1 ", expect ,Range.combine(range2, range1));
-		assertEquals("Null Range Combines with Non-NullRange Test 2 ", expect ,Range.combine(range1, range2));	
-	}
+//	@Test
+//	public void testNullRangeAndNonNullRange(){
+//		range1 = new Range(3,7);
+//		range2 = null;
+//		expect = range1;
+//		assertEquals("Null Range Combines with Non-NullRange Test 1 ", expect ,Range.combine(range2, range1));
+//		assertEquals("Null Range Combines with Non-NullRange Test 2 ", expect ,Range.combine(range1, range2));	
+//	}
 	
 	@Test 
 	public void testTwoNullRanges(){
